@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { ExpenseController } from "../controllers/ExpenseController";
+import { requireAuth } from "../middleware/auth";
+import { asyncHandler } from "../middleware/asyncHandler";
+const r = Router();
+r.get("/", requireAuth, asyncHandler(ExpenseController.list));
+r.post("/", requireAuth, asyncHandler(ExpenseController.create));
+r.put("/:id", requireAuth, asyncHandler(ExpenseController.update));
+r.delete("/:id", requireAuth, asyncHandler(ExpenseController.remove));
+export default r;

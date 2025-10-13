@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const BudgetController_1 = require("../controllers/BudgetController");
+const auth_1 = require("../middleware/auth");
+const asyncHandler_1 = require("../middleware/asyncHandler");
+const r = (0, express_1.Router)();
+r.get("/", auth_1.requireAuth, (0, asyncHandler_1.asyncHandler)(BudgetController_1.BudgetController.list));
+r.post("/", auth_1.requireAuth, (0, asyncHandler_1.asyncHandler)(BudgetController_1.BudgetController.create));
+r.put("/:id", auth_1.requireAuth, (0, asyncHandler_1.asyncHandler)(BudgetController_1.BudgetController.update));
+r.delete("/:id", auth_1.requireAuth, (0, asyncHandler_1.asyncHandler)(BudgetController_1.BudgetController.remove));
+exports.default = r;

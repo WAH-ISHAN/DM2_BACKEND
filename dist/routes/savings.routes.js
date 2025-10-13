@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const SavingController_1 = require("../controllers/SavingController");
+const auth_1 = require("../middleware/auth");
+const asyncHandler_1 = require("../middleware/asyncHandler");
+const r = (0, express_1.Router)();
+r.get("/", auth_1.requireAuth, (0, asyncHandler_1.asyncHandler)(SavingController_1.SavingController.list));
+r.post("/", auth_1.requireAuth, (0, asyncHandler_1.asyncHandler)(SavingController_1.SavingController.create));
+r.put("/:id", auth_1.requireAuth, (0, asyncHandler_1.asyncHandler)(SavingController_1.SavingController.update));
+r.delete("/:id", auth_1.requireAuth, (0, asyncHandler_1.asyncHandler)(SavingController_1.SavingController.remove));
+exports.default = r;

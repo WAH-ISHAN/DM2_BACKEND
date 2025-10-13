@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { SavingController } from "../controllers/SavingController";
+import { requireAuth } from "../middleware/auth";
+import { asyncHandler } from "../middleware/asyncHandler";
+const r = Router();
+r.get("/", requireAuth, asyncHandler(SavingController.list));
+r.post("/", requireAuth, asyncHandler(SavingController.create));
+r.put("/:id", requireAuth, asyncHandler(SavingController.update));
+r.delete("/:id", requireAuth, asyncHandler(SavingController.remove));
+export default r;
